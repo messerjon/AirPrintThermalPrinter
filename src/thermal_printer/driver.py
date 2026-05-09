@@ -28,8 +28,8 @@ class ThermalPrinterConfig:
     timeout: float = 5.0
 
     def __post_init__(self) -> None:
-        if self.heat_dots > 7:
-            raise ValueError("heat_dots must be <= 7")
+        if self.heat_dots < 0 or self.heat_dots > 7:
+            raise ValueError("heat_dots must be between 0 and 7")
 
 
 class ThermalPrinter:

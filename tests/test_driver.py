@@ -66,3 +66,8 @@ def test_is_available_uses_device_path(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(driver.os.path, "exists", lambda path: path == "/dev/usb/lp0")
     assert ThermalPrinter(ThermalPrinterConfig(port="/dev/usb/lp0")).is_available() is True
     assert ThermalPrinter(ThermalPrinterConfig(port="/dev/serial0")).is_available() is False
+
+
+def test_heat_dots_validates_supported_range() -> None:
+    with pytest.raises(ValueError):
+        ThermalPrinterConfig(heat_dots=-1)
