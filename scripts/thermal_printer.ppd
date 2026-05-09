@@ -1,0 +1,34 @@
+*PPD-Adobe: "4.3"
+*FormatVersion: "4.3"
+*FileVersion: "1.0"
+*LanguageVersion: English
+*LanguageEncoding: ISOLatin1
+*PCFileName: "THERMAL.PPD"
+*Manufacturer: "DFRobot"
+*Product: "(DFR0503)"
+*ModelName: "DFRobot DFR0503 Thermal Printer"
+*ShortNickName: "Thermal AirPrint"
+*NickName: "DFRobot DFR0503 Thermal Printer"
+*PSVersion: "(3010.000) 0"
+*ColorDevice: False
+*DefaultColorSpace: Gray
+*FileSystem: False
+*Throughput: "1"
+*cupsVersion: 2.2
+*cupsManualCopies: True
+*cupsFilter2: "application/octet-stream application/vnd.cups-raw 0 thermal_escpos"
+*cupsFilter2: "text/plain application/vnd.cups-raw 0 thermal_escpos"
+*cupsFilter2: "application/pdf application/vnd.cups-raw 0 thermal_escpos"
+*cupsFilter2: "application/postscript application/vnd.cups-raw 0 thermal_escpos"
+*cupsFilter2: "image/jpeg application/vnd.cups-raw 0 thermal_escpos"
+*cupsFilter2: "image/png application/vnd.cups-raw 0 thermal_escpos"
+*cupsFilter2: "image/urf application/vnd.cups-raw 0 thermal_escpos"
+*DefaultPageSize: Custom
+*PageSize Custom/58mm Roll: "<</PageSize[164 1000]>>setpagedevice"
+*PageRegion Custom/58mm Roll: "<</PageSize[164 1000]>>setpagedevice"
+*ImageableArea Custom/58mm Roll: "0 0 164 1000"
+*PaperDimension Custom/58mm Roll: "164 1000"
+*OpenUI *ColorModel/Color Mode: PickOne
+*DefaultColorModel: Gray
+*ColorModel Gray/Monochrome: ""
+*CloseUI: *ColorModel
