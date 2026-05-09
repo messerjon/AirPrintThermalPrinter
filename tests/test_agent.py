@@ -14,7 +14,7 @@ class FakePrinter:
     def __enter__(self) -> "FakePrinter":
         return self
 
-    def __exit__(self, exc_type, exc, traceback) -> None:
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         return None
 
     def send(self, payload: bytes) -> None:

@@ -21,8 +21,8 @@ def build_printer_config() -> ThermalPrinterConfig:
     )
 
 
-def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="thermal-airprint")
+def build_parser(prog: str = "thermal-airprint") -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog=prog)
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("test-print")
     subparsers.add_parser("agent")
@@ -30,9 +30,9 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None, prog: str = "thermal-airprint") -> int:
     logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
-    args = build_parser().parse_args(argv)
+    args = build_parser(prog=prog).parse_args(argv)
     printer_config = build_printer_config()
 
     if args.command == "status":
@@ -61,7 +61,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 def agent_main() -> int:
-    return main(["agent"])
+    return main(["agent"], prog="thermal-agent")
 
 
 if __name__ == "__main__":
