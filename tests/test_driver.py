@@ -69,11 +69,11 @@ def test_send_writes_raw_payload(monkeypatch: pytest.MonkeyPatch) -> None:
     assert handle.writes == [b"\x1b@\x1dV\x00"]
 
 
-@pytest.mark.parametrize("width,height", [(0, 1), (9, 1), (1, 0), (1, 9)])
-def test_set_size_validates_range(width: int, height: int) -> None:
+@pytest.mark.parametrize("invalid_width,invalid_height", [(0, 1), (9, 1), (1, 0), (1, 9)])
+def test_set_size_validates_range(invalid_width: int, invalid_height: int) -> None:
     printer = ThermalPrinter()
     with pytest.raises(ValueError):
-        printer.set_size(width, height)
+        printer.set_size(invalid_width, invalid_height)
 
 
 def test_is_available_uses_device_path(monkeypatch: pytest.MonkeyPatch) -> None:

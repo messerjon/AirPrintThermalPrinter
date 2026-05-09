@@ -40,7 +40,7 @@ class ThermalPrinterConfig:
 
     def __post_init__(self) -> None:
         if not 0 <= self.heat_dots <= 7:
-            raise ValueError("heat_dots must be between 0 and 7")
+            raise ValueError(f"heat_dots must be between 0 and 7, got {self.heat_dots}")
 
 
 class ThermalPrinter:
@@ -122,13 +122,13 @@ class ThermalPrinter:
 
     def set_size(self, width: int, height: int) -> None:
         if width < 1 or width > 8 or height < 1 or height > 8:
-            raise ValueError("width and height must be between 1 and 8")
+            raise ValueError(f"width and height must be between 1 and 8, got width={width}, height={height}")
         value = ((width - 1) << 4) | (height - 1)
         self.send(CMD_SIZE + bytes([value]))
 
     def feed(self, lines: int) -> None:
         if lines < 0 or lines > 255:
-            raise ValueError("lines must be between 0 and 255")
+            raise ValueError(f"lines must be between 0 and 255, got {lines}")
         self.send(CMD_FEED + bytes([lines]))
 
     def cut(self) -> None:

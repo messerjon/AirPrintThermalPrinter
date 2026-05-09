@@ -76,7 +76,7 @@ class ThermalPrinterAgent:
         )
         result_response.raise_for_status()
         if not ok:
-            raise RuntimeError(error or "print job failed")
+            raise RuntimeError(f"print job {job_id} failed: {error or 'unknown error'}")
         return True
 
     def run(self) -> None:
