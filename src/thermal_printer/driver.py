@@ -4,7 +4,7 @@ import os
 from dataclasses import dataclass
 from time import sleep
 from types import TracebackType
-from typing import Any, BinaryIO, Literal
+from typing import BinaryIO, Literal, Protocol
 
 CMD_INIT = b"\x1b@"
 CMD_FEED = b"\x1bd"
@@ -15,6 +15,17 @@ CMD_SIZE = b"\x1d!"
 CMD_CUT = b"\x1dV\x00"
 CMD_HEAT = b"\x1b7"
 CMD_CHARSET = b"\x1bR"
+
+
+class WritableHandle(Protocol):
+    def write(self, payload: bytes) -> object:
+        ...
+
+    def flush(self) -> object:
+        ...
+
+    def close(self) -> object:
+        ...
 
 
 @dataclass(frozen=True)
@@ -35,7 +46,7 @@ class ThermalPrinterConfig:
 class ThermalPrinter:
     def __init__(self, config: ThermalPrinterConfig | None = None) -> None:
         self.config = config or ThermalPrinterConfig()
-        self._handle: BinaryIO | Any | None = None
+        self._handle: BinaryIO | WritableHandle | None = None
 
     def __enter__(self) -> "ThermalPrinter":
         self.open()

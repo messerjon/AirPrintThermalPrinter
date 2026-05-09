@@ -55,6 +55,20 @@ def test_print_receipt_outputs_text_feed_and_cut(monkeypatch: pytest.MonkeyPatch
     assert handle.writes[-1] == driver.CMD_CUT
 
 
+def test_send_writes_raw_payload(monkeypatch: pytest.MonkeyPatch) -> None:
+    handle = FakeHandle()
+    monkeypatch.setattr(driver, "sleep", lambda *_args: None)
+    monkeypatch.setattr(builtins, "open", lambda *_args, **_kwargs: handle)
+
+    printer = ThermalPrinter(ThermalPrinterConfig(port="/dev/usb/lp0"))
+    printer.open()
+    handle.writes.clear()
+
+    printer.send(b"\x1b@\x1dV\x00")
+
+    assert handle.writes == [b"\x1b@\x1dV\x00"]
+
+
 @pytest.mark.parametrize("width,height", [(0, 1), (9, 1), (1, 0), (1, 9)])
 def test_set_size_validates_range(width: int, height: int) -> None:
     printer = ThermalPrinter()
