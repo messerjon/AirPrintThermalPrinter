@@ -1,0 +1,15 @@
+[Unit]
+Description=Thermal Printer Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+EnvironmentFile=/etc/thermal-agent.env
+ExecStart=/usr/local/bin/thermal-agent
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
