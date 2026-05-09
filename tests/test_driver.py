@@ -55,10 +55,11 @@ def test_print_receipt_outputs_text_feed_and_cut(monkeypatch: pytest.MonkeyPatch
     assert handle.writes[-1] == driver.CMD_CUT
 
 
-def test_set_size_validates_range() -> None:
+@pytest.mark.parametrize("width,height", [(0, 1), (9, 1), (1, 0), (1, 9)])
+def test_set_size_validates_range(width: int, height: int) -> None:
     printer = ThermalPrinter()
     with pytest.raises(ValueError):
-        printer.set_size(0, 1)
+        printer.set_size(width, height)
 
 
 def test_is_available_uses_device_path(monkeypatch: pytest.MonkeyPatch) -> None:
